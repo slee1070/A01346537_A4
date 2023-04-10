@@ -9,7 +9,7 @@ from time import sleep
 def slow_print(line: str, speed: float = 0.02):
     for character in line:
         print(character, end="", flush=True)
-        # sleep(speed)
+        sleep(speed)
     print()
 
 
