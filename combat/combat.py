@@ -1,3 +1,8 @@
+"""
+Sung Lee
+A01346537
+"""
+
 import random
 
 from character.character import still_alive, check_for_level_up, get_attack_strength
