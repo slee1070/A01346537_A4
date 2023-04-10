@@ -6,7 +6,20 @@ A01346537
 from helper.print_helper import slow_print, get_user_choice
 
 
-def checkout(choice: str, npc: dict, character: dict):
+def checkout(choice: str, npc: dict, character: dict) -> None:
+    """
+    Purchase selected item.
+
+    :param choice: a string representing the item to buy
+    :param npc: a dictionary representing the merchant
+    :param character: a dictionary representing the player
+    :precondition: choice must be a string and exist in the NPC's inventory
+    :precondition: NPC must be a dictionary that has an inventory dictionary
+    :precondition: character must be a dictionary that has a gold key and integer value
+    :postcondition: If character has gold equal to or greater than the item's cost, then the item is removed from the
+                    merchant's inventory and added to the character's equipment
+    >>>
+    """
     item = npc["inventory"][choice]
     item_cost = item["cost"]
     wallet = character["gold"]
@@ -20,6 +33,16 @@ def checkout(choice: str, npc: dict, character: dict):
 
 
 def resolve_shopkeeper(npc: dict, character: dict) -> None:
+    """
+    Greet the player and show items the player can buy.
+
+    :param npc: a dictionary representing the merchant
+    :param character: a dictionary representing the player
+    :precondition: npc must be a dictionary that has an inventory of items
+    :precondition: character must be a dictionary that has a gold key and integer value
+    :postcondition: the character is greeted and items are shown to the player
+    >>>
+    """
     slow_print("You enter the shop...")
     if len(npc["inventory"]) > 0:
         slow_print("Hello traveller, I have wares if you have coin.")
@@ -39,6 +62,17 @@ def resolve_shopkeeper(npc: dict, character: dict) -> None:
 
 
 def resolve_atk_booster(character: dict) -> None:
+    """
+    Handle talking to the attack booster NPC.
+
+    :param character: a dictionary representing the player
+    :precondition: character must be a dictionary that has a flags dictionary
+    :precondition: character must be a dictionary that has a stats dictionary
+    :postcondition: if the character's atk_boosted flag is False, the character's attack stat is increased
+    :postcondition: no boost takes place if the character's atk_boosted flag is True
+    :postcondition: if atk_boosted is False, it is set to True
+    >>>
+    """
     slow_print(f"Hello {character['name']}. ")
     if not character["flags"]["atk_boosted"]:
         slow_print("I will now make you stronger!")
@@ -50,6 +84,17 @@ def resolve_atk_booster(character: dict) -> None:
 
 
 def resolve_hp_booster(character: dict) -> None:
+    """
+    Handle talking to the attack booster NPC.
+
+    :param character: a dictionary representing the player
+    :precondition: character must be a dictionary that has a flags dictionary
+    :precondition: character must be a dictionary that has a stats dictionary
+    :postcondition: if the character's hp_boosted flag is False, the character's attack stat is increased
+    :postcondition: no boost takes place if the character's hp_boosted flag is True
+    :postcondition: if hp_boosted is False, it is set to True
+    >>>
+    """
     slow_print(f"Hello {character['name']}. ")
     if not character["flags"]["hp_boosted"]:
         slow_print("I will now make you stronger!")
@@ -62,6 +107,15 @@ def resolve_hp_booster(character: dict) -> None:
 
 
 def enter_shop(npc: dict, character: dict):
+    """
+    Determine how to interact with an NPC.
+
+    :param npc: a dictionary representing an NPC
+    :param character: a dictionary representing the player
+    :precondition: npc has the key named
+    :postcondition: the correct function is called
+    >>>
+    """
     if npc["name"] == "Merchant":
         resolve_shopkeeper(npc, character)
     elif npc["name"] == "Monk Brando":
