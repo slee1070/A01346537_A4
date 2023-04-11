@@ -398,8 +398,8 @@ def game():
             monsters, gold = generate_monsters(character)
             slow_print(describe_monsters(monsters))
             resolve_monsters(character, monsters, gold)
-        resolve_location(board, character)
         if still_alive(character):
+            resolve_location(board, character)
             if not character["flags"]["boss_spawned"]:
                 character["flags"]["boss_spawned"] = spawn_boss(board, character)
         else:
