@@ -15,11 +15,10 @@ def get_random_coordinate(board: dict) -> tuple:
 
     :param board: a dictionary that represents the game board
     :precondition: board must have greater than 1 row and column
-    :precondition: board must have a ["dimensions"]["rows"] value that reprents the number of rows
-    :precondition: board must have a ["dimensions"]["columns"] value that reprents the number of columns
+    :precondition: board must have a ["dimensions"]["rows"] value that represents the number of rows
+    :precondition: board must have a ["dimensions"]["columns"] value that represents the number of columns
     :postcondition: a random coordinate is generated between 0 and max row and column
     :return: a coordinate as a tuple
-    >>>
     """
     x = random.randint(0, board["dimensions"]["rows"] - 1)
     y = random.randint(0, board["dimensions"]["columns"] - 1)
@@ -33,7 +32,7 @@ def place_npcs(board: dict) -> None:
     :param board: a dictionary that represents the game board
     :precondition: board must have at least three cells
     :postcondition: Merchant, Monk Brando and Monk Sando are randomly added to unique cells on the board
-    >>>
+    :raises ValueError: if board does not have at least three cells
     """
     list_of_coordinates = set()
     while len(list_of_coordinates) < 3:
@@ -60,7 +59,6 @@ def place_boss(board: dict) -> None:
     :param board: a dictionary that represents the game board
     :precondition: the board has a list of NPC coordinates
     :postcondition: the boss is randomly placed at one of the NPC coordinates
-    >>>
     """
     coordinate = random.choice(board["npcs"])
     board[coordinate]["npc"] = {
@@ -79,7 +77,11 @@ def has_boss(board: dict, coordinate: tuple) -> bool:
     :postcondition: True is returned if the coordinate has the boss, False otherwise
     :return: True if the coordinate has the boss, False otherwise
     :raises: KeyError: if the coordinate is not within the board
-    >>>
+    >>> test_board = { (0, 0): {"npc": {"name": "boss"}}, (0, 1): {} }
+    >>> has_boss(test_board, (0, 0))
+    True
+    >>> has_boss(test_board, (0, 1))
+    False
     """
     try:
         return board[coordinate]["npc"] and board[coordinate]["npc"]["name"] == "boss"
@@ -97,7 +99,6 @@ def make_board(rows: int, columns: int) -> dict:
     :precondition: columns must be a positive integer greater than 0
     :postcondition: a rows x columns grid is generated along with NPCs and a text description of each cell
     :return: a dictionary representing the game board
-    >>>
     """
     def generate_location_description():
         adjective = random.choice(ADJECTIVES)
