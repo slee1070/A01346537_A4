@@ -3,7 +3,7 @@ Sung Lee
 A01346537
 """
 
-from helper.print_helper import slow_print, get_user_choice
+from helper.helper import slow_print, get_user_choice
 
 
 def checkout(choice: str, npc: dict, character: dict) -> None:
@@ -18,7 +18,6 @@ def checkout(choice: str, npc: dict, character: dict) -> None:
     :precondition: character must be a dictionary that has a gold key and integer value
     :postcondition: If character has gold equal to or greater than the item's cost, then the item is removed from the
                     merchant's inventory and added to the character's equipment
-    >>>
     """
     item = npc["inventory"][choice]
     item_cost = item["cost"]
@@ -41,7 +40,6 @@ def resolve_shopkeeper(npc: dict, character: dict) -> None:
     :precondition: npc must be a dictionary that has an inventory of items
     :precondition: character must be a dictionary that has a gold key and integer value
     :postcondition: the character is greeted and items are shown to the player
-    >>>
     """
     slow_print("You enter the shop...")
     if len(npc["inventory"]) > 0:
@@ -71,7 +69,6 @@ def resolve_atk_booster(character: dict) -> None:
     :postcondition: if the character's atk_boosted flag is False, the character's attack stat is increased
     :postcondition: no boost takes place if the character's atk_boosted flag is True
     :postcondition: if atk_boosted is False, it is set to True
-    >>>
     """
     slow_print(f"Hello {character['name']}. ")
     if not character["flags"]["atk_boosted"]:
@@ -93,7 +90,6 @@ def resolve_hp_booster(character: dict) -> None:
     :postcondition: if the character's hp_boosted flag is False, the character's attack stat is increased
     :postcondition: no boost takes place if the character's hp_boosted flag is True
     :postcondition: if hp_boosted is False, it is set to True
-    >>>
     """
     slow_print(f"Hello {character['name']}. ")
     if not character["flags"]["hp_boosted"]:
@@ -114,7 +110,6 @@ def enter_shop(npc: dict, character: dict):
     :param character: a dictionary representing the player
     :precondition: npc has the key named
     :postcondition: the correct function is called
-    >>>
     """
     if npc["name"] == "Merchant":
         resolve_shopkeeper(npc, character)
