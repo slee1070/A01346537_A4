@@ -90,7 +90,7 @@ def determine_choices(board: dict, character: dict, rested: bool) -> list:
     npc_present = character_coordinate in board["npcs"]
     if npc_present:
         if has_boss(board, character_coordinate):
-            choices.append(("boss", f" {len(choices) + 1}: Start final fight with the big bad evil cat"))
+            choices.append(("boss", f" {len(choices) + 1}: Start final fight with Purrsecutor"))
         else:
             choices.append(("npc", f" {len(choices) + 1}: Talk to {board[character_coordinate]['npc']['name']}"))
     choices.append(("inspect", f" {len(choices) + 1}: Inspect yourself"))
@@ -315,7 +315,7 @@ def intro_story():
     :postcondition: prints the intro story as a string
     :return: None
     """
-    slow_print("As you walk through the city, you hear a commotion near the town square.\n"
+    slow_print("As you walk through the town, you hear a commotion near the town square.\n"
                "Following the meowing, you find a mysterious cat.\n"
                "But a shadowy figure snatches it away. You must embark on a perilous journey\n"
                "to save the cat, battling fierce foes and overcoming treacherous obstacles.\n"
