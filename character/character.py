@@ -3,7 +3,7 @@ Sung Lee
 A01346537
 """
 
-from helper.print_helper import slow_print
+from helper.helper import slow_print
 
 
 def make_character():
@@ -14,9 +14,14 @@ def make_character():
     :postcondition: the character class is set by the player
     :postcondition: the character dictionary is created with relevant attributes
     :return: a dictionary representing the character
-    >>>
     """
     def get_player_class():
+        """
+        Ask the player to choose a class and return their choice.
+
+        :postcondition: The player's class choice is validated to be either "1" for wizard or "2" for warrior.
+        :return: The player's class choice as a string.
+        """
         slow_print("Are you a wizard or a warrior?\n1. wizard\n2. warrior")
         player_class = input()
         while player_class != "1" and player_class != "2":
@@ -26,6 +31,12 @@ def make_character():
         return "wizard" if player_class == "1" else "warrior"
 
     def get_player_name():
+        """
+        Ask the player to enter their name and return it.
+
+        :postcondition: The player's name is validated to be a non-empty string.
+        :return: The player's name as a string.
+        """
         slow_print("What is your name?")
         player_name = input()
         while not player_name:
@@ -44,6 +55,7 @@ def make_character():
         "flags": {
             "atk_boosted": False,
             "hp_boosted": False,
+            "boss_spawned": False,
             "achieved_goal": False
         }
     }
@@ -58,7 +70,10 @@ def get_attack_strength(character):
     :precondition: character is a dictionary that has the equipment key and a list of items as value
     :postcondition: attack items, if any, are added to the character base attack value
     :return: an integer representing the total attack value
-    >>>
+    >>> get_attack_strength({"stats": {"attack": 15}, "equipment": {}})
+    15
+    >>> get_attack_strength({"stats": {"attack": 0}, "equipment": {}})
+    0
     """
     strength = character["stats"]["attack"]
     for equipment in character["equipment"]:
@@ -77,7 +92,10 @@ def get_max_hp(character):
     :precondition: character is a dictionary that has the equipment key and a list of items as value
     :postcondition: hp items, if any, are added to the character base hp value
     :return: an integer representing the total hp value
-    >>>
+    >>> get_max_hp({"stats": {"max_hp": 50}, "equipment": {}})
+    50
+    >>> get_max_hp({"stats": {"max_hp": 100}, "equipment": {}})
+    100
     """
     hp = character["stats"]["max_hp"]
     for item in character["equipment"].values():
@@ -96,7 +114,18 @@ def move_character(character: dict, direction: str) -> bool:
     :precondition: direction is a string that is up, down, left, or right
     :postcondition: the character location is updated according to the direction
     :return: True if the location is updated, otherwise False
-    >>>
+    >>> test_character = {"location": (0, 0)}
+    >>> move_character(test_character, "up")
+    You go up...
+    True
+    >>> test_character["location"]
+    (0, 1)
+    >>> test_character = {"location": (2, 3)}
+    >>> move_character(test_character, "right")
+    You go right...
+    True
+    >>> test_character["location"]
+    (3, 3)
     """
     moved = True
     character_coordinate = character["location"]
@@ -125,7 +154,10 @@ def still_alive(character: dict) -> bool:
     :precondition: the character is a dictionary that has the keys stats and current_hp with an integer value
     :postcondition: the value of current_hp is checked to see if it is greater than 0
     :return: True of current_hp is greater than 0, otherwise False
-    >>>
+    >>> still_alive({"stats": {"current_hp": 10}})
+    True
+    >>> still_alive({"stats": {"current_hp": 0}})
+    False
     """
     return character["stats"]["current_hp"] > 0
 
@@ -137,7 +169,16 @@ def inspect_self(character: dict) -> None:
     :param character: a dictionary representing the player
     :precondition: character is a dictionary with valid keys
     :postcondition: certain information about the character is printed to the player
-    >>>
+    >>> inspect_self({"name": "Calico", "stats": {"level": 1, "attack": 10, "max_hp": 50, "current_hp": 25}, \
+    "class": "Warrior", "equipment": {}, "gold": 100})
+    You look at yourself in the mirror...
+    Name: Calico
+    Level: 1
+    Class: Warrior
+    Equipped: []
+    Attack: 10
+    HP: 25/50
+    Wallet: 100 gold
     """
     slow_print("You look at yourself in the mirror...")
     print(f"Name: {character['name']}")
@@ -158,7 +199,11 @@ def check_for_level_up(character: dict) -> None:
     :precondition: character must be a dictionary with the keys stats and level with an integer value
     :postcondition: if victories is twice the value of level, then increase the attack, max_hp and level
     :postcondition: if victories is twice the value of level, then set victories to 0
-    >>>
+    >>> test_character = {'stats': {'level': 1, 'victories': 2, 'attack': 20, 'max_hp': 20, 'current_hp': 20}}
+    >>> check_for_level_up(test_character)
+    You have levelled up! You are now level 2
+    >>> test_character
+    {'stats': {'level': 2, 'victories': 0, 'attack': 25, 'max_hp': 35, 'current_hp': 35}}
     """
     fights = character["stats"]["victories"]
     level = character["stats"]["level"]
