@@ -64,8 +64,8 @@ def resolve_atk_booster(character: dict) -> None:
     Handle talking to the attack booster NPC.
 
     :param character: a dictionary representing the player
-    :precondition: character must be a dictionary that has a flags dictionary
-    :precondition: character must be a dictionary that has a stats dictionary
+    :precondition: character must be a dictionary that has a "flags" key
+    :precondition: character must be a dictionary that has a "stats" key
     :postcondition: if the character's atk_boosted flag is False, the character's attack stat is increased
     :postcondition: no boost takes place if the character's atk_boosted flag is True
     :postcondition: if atk_boosted is False, it is set to True
@@ -85,8 +85,8 @@ def resolve_hp_booster(character: dict) -> None:
     Handle talking to the attack booster NPC.
 
     :param character: a dictionary representing the player
-    :precondition: character must be a dictionary that has a flags dictionary
-    :precondition: character must be a dictionary that has a stats dictionary
+    :precondition: character must be a dictionary that has a "flags" key
+    :precondition: character must be a dictionary that has a "stats" key
     :postcondition: if the character's hp_boosted flag is False, the character's attack stat is increased
     :postcondition: no boost takes place if the character's hp_boosted flag is True
     :postcondition: if hp_boosted is False, it is set to True
