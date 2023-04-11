@@ -13,4 +13,19 @@ A01346537
 ## Your GitHub ID:
 slee1070
 
-## Any important comments you'd like to make about your work:
+## Required information:
+| Elements                | Module Name          | Line Number | Function Name             |
+|-------------------------|----------------------|-------------|---------------------------|
+| 5 X 5 board             | board.board.py       | 92          | make_board                |
+| Gameplay ends           | game.py              | 407         | game                      |
+| Character movement      | game.py              | 49-58       | get_valid_directions      |
+| Challenges              | combat.combat.py     | 178         | enter_combat              |
+| Mutability is minimized | game.py              | 48          | get_valid_directions      |
+| List comprehension      | game.py              | 89          | determine_choices         |
+| if-statements           | combat.combat.py     | 56-70       | process_dice_result       |
+| for-loop/while loop     | combat.combat.py     | 190         | enter_combat              |
+| Membership operator     | combat.combat.py     | 192         | enter_combat              |
+| range function          | board.board.py       | 114         | make_board                |
+| itertools function      | game.py              | 89          | determine_choices         |
+| random module           | character.monster.py | 84          | generate_monster          |
+| f-strings               | game.py              | 32          | describe_current_location |
