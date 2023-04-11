@@ -29,3 +29,5 @@ slee1070
 | itertools function      | game.py              | 89          | determine_choices         |
 | random module           | character.monster.py | 84          | generate_monster          |
 | f-strings               | game.py              | 32          | describe_current_location |
+| Save game               | helper.helper.py     | 58          | save_to_file              |
+| Load game               | helper.helper.py     | 74          | read_from_file            |
